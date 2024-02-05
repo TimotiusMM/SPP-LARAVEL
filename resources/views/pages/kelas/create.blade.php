@@ -14,7 +14,7 @@
 
                         <div>
                             <x-input-label for="namaKelas" :value="__('Nama Kelas')" />
-                            <x-text-input id="namaKelas" name="namaKelas" type="text" class="mt-1 block w-full" :value="old('namaKelas')" autofocus />
+                            <x-text-input id="namaKelas" name="namaKelas" type="text" class="mt-1 block w-full" :value="old('nama')" autofocus />
                             <x-input-error class="mt-2" :messages="$errors->get('namaKelas')" />
                         </div>
 

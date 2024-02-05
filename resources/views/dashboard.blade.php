@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Dasbor') }}
         </h2>
     </x-slot>
 
@@ -70,11 +70,11 @@
                                                 {{ "Rp" . number_format($siswa->bayar?->nominal,2,',','.') }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                <a href="{{ route('payment.index', $siswa->nisn) }}"
+                                                <a href="{{ route('pembayaran.index', $siswa->nisn) }}"
                                                    class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 transition ease-in-out duration-150">
                                                     Riwayat
                                                 </a>
-                                                <a href="{{ route('payment.create', $siswa->nisn) }}"
+                                                <a href="{{ route('pembayaran.create', $siswa->nisn) }}"
                                                    class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 transition ease-in-out duration-150">
                                                     Bayar
                                                 </a>

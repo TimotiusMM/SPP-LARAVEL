@@ -24,7 +24,7 @@ class UserFactory extends Factory
             'nama' => fake('id_ID')->name(),
             'username' => $username,
             'password' => Hash::make($username),
-            'role' => Role::STAFF,
+            'role' => Role::PETUGAS,
         ];
     }
 }

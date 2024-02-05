@@ -15,10 +15,10 @@ return new class extends Migration
             $table->char('nisn')->primary();
             $table->char('nis');
             $table->string('nama');
-            $table->text('address');
+            $table->text('alamat');
             $table->string('telp');
-            $table->foreignId('idKelas')->constrained('kelas')->cascadeOnDelete();
-            $table->foreignId('idSpp')->constrained('spp')->cascadeOnDelete();
+            $table->foreignId('idKelas')->constrained('kelass')->cascadeOnDelete();
+            $table->foreignId('idSpp')->constrained('spps')->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -31,39 +31,39 @@
                         </div>
 
                         <div>
-                            <x-input-label for="address" :value="__('Alamat')" />
-                            <x-text-input id="address" name="address" type="text" class="mt-1 block w-full" :value="old('address')" />
-                            <x-input-error class="mt-2" :messages="$errors->get('address')" />
+                            <x-input-label for="alamat" :value="__('Alamat')" />
+                            <x-text-input id="alamat" name="alamat" type="text" class="mt-1 block w-full" :value="old('alamat')" />
+                            <x-input-error class="mt-2" :messages="$errors->get('alamat')" />
                         </div>
 
                         <div>
-                            <x-input-label for="phone" :value="__('Nomor Telepon')" />
-                            <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full" :value="old('phone')" />
-                            <x-input-error class="mt-2" :messages="$errors->get('phone')" />
+                            <x-input-label for="telp" :value="__('Nomor Telepon')" />
+                            <x-text-input id="telp" name="telp" type="text" class="mt-1 block w-full" :value="old('telp')" />
+                            <x-input-error class="mt-2" :messages="$errors->get('telp')" />
                         </div>
 
                         <div>
-                            <x-input-label for="grade_id" :value="__('Kelas')" />
-                            <select id="grade_id" name="grade_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                                @foreach($grades as $grade)
-                                    <option value="{{ $grade->id }}" @selected(old('grade_id') == $grade->id)>
-                                        {{ $grade->grade_name . ' - ' . $grade->skill_competency }}
+                            <x-input-label for="idKelas" :value="__('Kelas')" />
+                            <select id="idKelas" name="idKelas" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                @foreach($kelass as $kelas)
+                                    <option value="{{ $kelas->id }}" @selected(old('idKelas') == $kelas->id)>
+                                        {{ $kelas->namaKelas . ' - ' . $kelas->jurusan }}
                                     </option>
                                 @endforeach
                             </select>
-                            <x-input-error class="mt-2" :messages="$errors->get('grade_id')" />
+                            <x-input-error class="mt-2" :messages="$errors->get('idKelas')" />
                         </div>
 
                         <div>
-                            <x-input-label for="school_fee_id" :value="__('SPP')" />
-                            <select id="school_fee_id" name="school_fee_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                                @foreach($fees as $fee)
-                                    <option value="{{ $fee->id }}" @selected(old('school_fee_id') == $fee->id)>
-                                        {{ $fee->year . ' - ' . "Rp" . number_format($fee->nominal,2,',','.') }}
+                            <x-input-label for="idSpp" :value="__('SPP')" />
+                            <select id="idSpp" name="idSpp" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                @foreach($bayars as $bayar)
+                                    <option value="{{ $bayar->id }}" @selected(old('idSpp') == $bayar->id)>
+                                        {{ $bayar->tahun . ' - ' . "Rp" . number_format($bayar->nominal,2,',','.') }}
                                     </option>
                                 @endforeach
                             </select>
-                            <x-input-error class="mt-2" :messages="$errors->get('school_fee_id')" />
+                            <x-input-error class="mt-2" :messages="$errors->get('idSpp')" />
                         </div>
 
                         <div class="flex items-center gap-4">

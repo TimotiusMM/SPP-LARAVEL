@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('tahunBayar');
             $table->char('nisn', 10);
             $table->foreignId('idUser')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('idSpp')->constrained('spp')->cascadeOnDelete();
-            $table->foreign('nisn')->references('nisn')->on('siswa')->cascadeOnDelete();
+            $table->foreignId('idSpp')->constrained('spps')->cascadeOnDelete();
+            $table->foreign('nisn')->references('nisn')->on('siswas')->cascadeOnDelete();
             $table->timestamps();
         });
     }

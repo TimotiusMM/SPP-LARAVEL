@@ -51,6 +51,16 @@ Route::middleware('auth')->group(function () {
         ->middleware('role:' . Role::ADMIN->value)
         ->except(['show']);
 
+         // Menambahkan rute untuk pembaruan kelas
+    Route::get('kelas/{kelas}/edit', [KelasController::class, 'edit'])
+    ->name('kelas.edit')
+    ->middleware('role:' . Role::ADMIN->value);
+
+    Route::patch('kelas/{kelas}', [KelasController::class, 'update'])
+    ->name('kelas.update')
+    ->middleware('role:' . Role::ADMIN->value);
+
+
     Route::resource('petugas', PetugasController::class)
         ->middleware('role:' . Role::ADMIN->value)
         ->except(['show']);

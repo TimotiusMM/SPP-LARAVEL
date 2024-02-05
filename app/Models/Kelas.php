@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kelas extends Model
 {
+    protected $table = 'kelass'; // Sesuaikan dengan nama tabel yang ada di database Anda
+
     use HasFactory;
 
     protected $fillable = ['namaKelas', 'jurusan'];

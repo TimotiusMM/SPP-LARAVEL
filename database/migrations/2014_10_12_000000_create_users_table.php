@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('username')->unique();
             $table->string('password');
-            $table->string('role')->default('staff');
+            $table->string('role')->default('petugas');
             $table->timestamps();
         });
     }
