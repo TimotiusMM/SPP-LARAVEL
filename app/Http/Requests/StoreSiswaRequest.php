@@ -6,7 +6,7 @@ use App\Enums\Role;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreStudentRequest extends FormRequest
+class StoreSiswaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,11 +19,11 @@ class StoreStudentRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'nama',
-            'address' => 'alamat',
-            'phone' => 'nomor telepon',
-            'grade_id' => 'kelas',
-            'school_fee_id' => 'spp',
+            'nama' => 'nama',
+            'alamat' => 'alamat',
+            'telp' => 'nomor telepon',
+            'idKelas' => 'kelas',
+            'idSpp' => 'spp',
         ];
     }
 
@@ -35,13 +35,14 @@ class StoreStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nisn' => ['required', 'digits:10', 'unique:students,nisn'],
-            'nis' => ['required', 'digits:8', 'unique:students,nis'],
-            'name' => ['required'],
-            'address' => ['required'],
-            'phone' => ['required'],
-            'grade_id' => 'required',
-            'school_fee_id' => 'required',
+            'nisn' => ['required', 'unique:siswas,nisn'],
+'nis' => ['required', 'unique:siswas,nis'],
+
+            'nama' => ['required'],
+            'alamat' => ['required'],
+            'telp' => ['required'],
+            'idKelas' => 'required',
+            'idSpp' => 'required',
         ];
     }
 }

@@ -6,7 +6,7 @@ use App\Enums\Role;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateStudentRequest extends FormRequest
+class UpdateSppRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,14 +16,10 @@ class UpdateStudentRequest extends FormRequest
         return auth()->user()->role == Role::ADMIN->value;
     }
 
-    public function attributes(): array
+    public function attributes()
     {
         return [
-            'name' => 'nama',
-            'address' => 'alamat',
-            'phone' => 'nomor telepon',
-            'grade_id' => 'kelas',
-            'school_fee_id' => 'spp',
+            'tahun' => 'tahun',
         ];
     }
 
@@ -35,11 +31,8 @@ class UpdateStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required'],
-            'address' => ['required'],
-            'phone' => ['required'],
-            'grade_id' => 'required',
-            'school_fee_id' => 'required',
+            'tahun' => ['required', 'numeric', 'digits:4'],
+            'nominal' => ['required', 'numeric', 'min:0'],
         ];
     }
 }

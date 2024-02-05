@@ -19,7 +19,7 @@ class UpdateUserRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'Nama',
+            'nama' => 'Nama',
         ];
     }
 
@@ -31,7 +31,7 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required'],
+            'nama' => ['required'],
             'username' => ['required', \Illuminate\Validation\Rule::unique('users')->ignore($this->id)],
         ];
     }

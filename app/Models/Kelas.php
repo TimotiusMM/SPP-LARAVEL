@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SchoolFee extends Model
+class Kelas extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['year', 'nominal'];
+    protected $fillable = ['namaKelas', 'jurusan'];
 
     public function scopeSearch($query, $search)
     {
-        return $query->when($search, function ($query, $find) {
-            return $query->where('year', 'LIKE', $find . '%');
+        return $query->when($search, function($query, $find) {
+            return $query
+                ->where('namaKelas', 'LIKE', $find . '%')
+                ->orWhere('jurusan', 'LIKE', '%' . $find . '%');
         });
     }
 
@@ -28,3 +30,4 @@ class SchoolFee extends Model
             ]);
     }
 }
+

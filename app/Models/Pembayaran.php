@@ -6,28 +6,28 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Payment extends Model
+class Pembayaran extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'paid_at', 'amount', 'paid_month', 'paid_year',
-        'nisn', 'user_id', 'school_fee_id',
+        'tanggalBayar', 'jumlah', 'bulanBayar', 'tahunBayar',
+        'nisn', 'idUser', 'idSpp',
     ];
 
-    public function student(): HasOne
+    public function siswa(): HasOne
     {
-        return $this->hasOne(Student::class, 'nisn', 'nisn');
+        return $this->hasOne(Siswa::class, 'nisn', 'nisn');
     }
 
-    public function staff(): HasOne
+    public function petugas(): HasOne
     {
-        return $this->hasOne(User::class, 'id','user_id', );
+        return $this->hasOne(User::class, 'id','idUser', );
     }
 
-    public function fee(): HasOne
+    public function bayar(): HasOne
     {
-        return $this->hasOne(SchoolFee::class, 'id','school_fee_id');
+        return $this->hasOne(Spp::class, 'id','idSpp');
     }
 
     public function scopeSearch($query, $search)
@@ -35,15 +35,15 @@ class Payment extends Model
         return $query->when($search, function ($query, $find) {
             return $query
                 ->where('nisn', $find)
-                ->orWhere('paid_month', $find)
-                ->orWhere('paid_year', $find);
+                ->orWhere('bulanBayar', $find)
+                ->orWhere('tahunBayar', $find);
         });
     }
 
     public function scopeRender($query, $search, $key)
     {
         return $query
-            ->with(['staff', 'fee', 'student'])
+            ->with(['petugas', 'bayar', 'siswa'])
             ->search($search)
             ->where('nisn', $key)
             ->latest()

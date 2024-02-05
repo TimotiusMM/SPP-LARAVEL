@@ -6,7 +6,7 @@ use App\Enums\Role;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreGradeRequest extends FormRequest
+class StoreSppRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,11 +16,10 @@ class StoreGradeRequest extends FormRequest
         return auth()->user()->role == Role::ADMIN->value;
     }
 
-    public function attributes(): array
+    public function attributes()
     {
         return [
-            'grade_name' => 'Nama Kelas',
-            'skill_competency' => 'Kompetensi Keahlian',
+            'tahun' => 'tahun',
         ];
     }
 
@@ -32,8 +31,8 @@ class StoreGradeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'grade_name' => ['required'],
-            'skill_competency' => ['required'],
+            'tahun' => ['required', 'numeric', 'digits:4'],
+            'nominal' => ['required', 'numeric', 'min:0'],
         ];
     }
 }

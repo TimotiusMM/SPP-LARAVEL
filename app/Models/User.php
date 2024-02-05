@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'nama',
         'username',
         'password',
         'role'
@@ -38,7 +38,7 @@ class User extends Authenticatable
     {
         return $query->when($search, function ($query, $find) {
             return $query
-                ->where('name', 'LIKE', $find . '%')
+                ->where('nama', 'LIKE', $find . '%')
                 ->orWhere('username', 'LIKE', '%' . $find . '%');
         });
     }
@@ -47,7 +47,7 @@ class User extends Authenticatable
     {
         return $query
             ->search($search)
-            ->where('role', Role::STAFF)
+            ->where('role', Role::PETUGAS)
             ->paginate(5)
             ->appends([
                 'search' => $search,

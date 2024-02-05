@@ -6,7 +6,7 @@ use App\Enums\Role;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateGradeRequest extends FormRequest
+class UpdateSiswaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,8 +19,11 @@ class UpdateGradeRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'grade_name' => 'Nama Kelas',
-            'skill_competency' => 'Kompetensi Keahlian',
+            'nama' => 'nama',
+            'alamat' => 'alamat',
+            'telp' => 'nomor telepon',
+            'idKelas' => 'kelas',
+            'idSpp' => 'spp',
         ];
     }
 
@@ -32,8 +35,11 @@ class UpdateGradeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'grade_name' => ['required'],
-            'skill_competency' => ['required'],
+            'nama' => ['required'],
+            'alamat' => ['required'],
+            'telp' => ['required'],
+            'idKelas' => 'required',
+            'idSpp' => 'required',
         ];
     }
 }
