@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Kelas') }}
+            {{ __('Petugas') }}
         </h2>
     </x-slot>
 
@@ -26,7 +26,7 @@
                                     </form>
                                 </div>
                                 <div class="ml-3">
-                                    <a href="{{ route('grade.create') }}"
+                                    <a href="{{ route('petugas.create') }}"
                                        class="inline-flex items-center px-6 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 transition ease-in-out duration-150">
                                         Tambah
                                     </a>
@@ -38,10 +38,10 @@
                                     <thead class="border-b">
                                     <tr>
                                         <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                                            Nama Kelas
+                                            Nama
                                         </th>
                                         <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                                            Kompetensi Keahlian
+                                            Username
                                         </th>
                                         <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
                                             Aksi
@@ -49,20 +49,20 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($grades as $grade)
+                                    @foreach($petugass as $petugas)
                                         <tr class="border-b">
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $grade->grade_name }}
+                                                {{ $petugas->nama }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $grade->skill_competency }}
+                                                {{ $petugas->username }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                <form action="{{ route('grade.destroy', $grade->id) }}" method="post">
+                                                <form action="{{ route('petugas.destroy', $petugas->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <div class="flex">
-                                                        <a href="{{ route('grade.edit', $grade->id) }}"
+                                                        <a href="{{ route('petugas.edit', $petugas->id) }}"
                                                            class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 transition ease-in-out duration-150">
                                                             Edit
                                                         </a>
@@ -79,7 +79,7 @@
                                 </table>
                             </div>
 
-                            {!! $grades->links() !!}
+                            {!! $petugass->links() !!}
 
                             @if (in_array(session('status'), ['success', 'failed']))
                                 <p

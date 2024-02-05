@@ -42,19 +42,19 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($payments as $payment)
+                                    @foreach($pembayarans as $pembayaran)
                                         <tr class="border-b">
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $payment->paid_at }}
+                                                {{ $pembayaran->tanggalBayar }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $payment->paid_month . ' ' . $payment->paid_year }}
+                                                {{ $pembayaran->bulanBayar . ' ' . $pembayaran->tahunBayar }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ "Rp" . number_format($payment->amount,2,',','.') }}
+                                                {{ "Rp" . number_format($pembayaran->jumlah,2,',','.') }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $payment->staff?->name }}
+                                                {{ $pembayaran->petugas?->nama }}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -62,7 +62,7 @@
                                 </table>
                             </div>
 
-                            {!! $payments->links() !!}
+                            {!! $pembayarans->links() !!}
 
                             @if (in_array(session('status'), ['success', 'failed']))
                                 <p

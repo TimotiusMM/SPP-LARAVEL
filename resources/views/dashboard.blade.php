@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dasbor') }}
+            {{ __('Dashboard') }}
         </h2>
     </x-slot>
 
@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    {{ __("Selamat datang, " . auth()->user()->name)  }}
+                    {{ __("Selamat datang, " . auth()->user()->nama)  }}
                 </div>
             </div>
         </div>
@@ -55,26 +55,26 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($students as $student)
+                                    @foreach($siswas as $siswa)
                                         <tr class="border-b">
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $student->nisn . ' | ' . $student->nis }}
+                                                {{ $siswa->nisn . ' | ' . $siswa->nis }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $student->name }}
+                                                {{ $siswa->nama }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $student->grade?->grade_name }}
+                                                {{ $siswa->kelas?->namaKelas }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ "Rp" . number_format($student->fee?->nominal,2,',','.') }}
+                                                {{ "Rp" . number_format($siswa->bayar?->nominal,2,',','.') }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                <a href="{{ route('payment.index', $student->nisn) }}"
+                                                <a href="{{ route('payment.index', $siswa->nisn) }}"
                                                    class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 transition ease-in-out duration-150">
                                                     Riwayat
                                                 </a>
-                                                <a href="{{ route('payment.create', $student->nisn) }}"
+                                                <a href="{{ route('payment.create', $siswa->nisn) }}"
                                                    class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 transition ease-in-out duration-150">
                                                     Bayar
                                                 </a>
@@ -85,7 +85,7 @@
                                 </table>
                             </div>
 
-                            {!! $students->links() !!}
+                            {!! $siswas->links() !!}
 
                             @if (in_array(session('status'), ['success', 'failed']))
                                 <p

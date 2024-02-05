@@ -9,21 +9,28 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
-                    <form method="post" action="{{ route('fee.update', $fee) }}" class="mt-6 space-y-6">
+                    <form method="post" action="{{ route('petugas.update', $petugas) }}" class="mt-6 space-y-6">
                         @csrf
                         @method('patch')
+                        <input type="hidden" name="id" value="{{ $petugas->id }}">
 
                         <div>
-                            <x-input-label for="year" :value="__('Tahun')" />
-                            <x-text-input id="year" name="year" type="number" min="2010" max="2030" class="mt-1 block w-full" :value="old('year', $fee->year)" autofocus />
-                            <x-input-error class="mt-2" :messages="$errors->get('year')" />
+                            <x-input-label for="nama" :value="__('Nama')"/>
+                            <x-text-input id="nama" name="nama" type="text" class="mt-1 block w-full"
+                                          :value="old('nama', $petugas->nama)" autofocus/>
+                            <x-input-error class="mt-2" :messages="$errors->get('nama')"/>
                         </div>
 
                         <div>
-                            <x-input-label for="nominal" :value="__('Nominal')" />
-                            <x-text-input id="nominal" name="nominal" type="number" min="0" class="mt-1 block w-full" :value="old('nominal', $fee->nominal)" />
-                            <x-input-error class="mt-2" :messages="$errors->get('nominal')" />
+                            <x-input-label for="username" :value="__('Username')"/>
+                            <x-text-input id="username" name="username" type="text" class="mt-1 block w-full"
+                                          :value="old('username', $petugas->username)"/>
+                            <x-input-error class="mt-2" :messages="$errors->get('username')"/>
                         </div>
+
+                        <p
+                            class="text-sm text-gray-600 mb-4"
+                        >{{ __('Anda tidak dapat mengganti password dari akun petugas.') }}</p>
 
                         <div class="flex items-center gap-4">
                             <x-primary-button>{{ __('Simpan') }}</x-primary-button>
