@@ -1,13 +1,13 @@
 <?php
 
 use App\Enums\Role;
-use App\Http\Controllers\GradeController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SchoolFeeController;
-use App\Http\Controllers\StaffController;
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SppController;
+use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,41 +21,41 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/student/login', [PageController::class, 'login'])->name('guest.login');
-Route::post('/student/login', [PageController::class, 'authentication'])->name('guest.auth');
-Route::post('/student/logout', [PageController::class, 'logout'])->name('guest.logout');
-Route::get('/student/{student}/history', [PageController::class, 'history'])->name('guest.history');
+Route::get('/siswa/login', [PageController::class, 'login'])->name('guest.login');
+Route::post('/siswa/login', [PageController::class, 'authentication'])->name('guest.auth');
+Route::post('/siswa/logout', [PageController::class, 'logout'])->name('guest.logout');
+Route::get('/siswa/{siswa}/history', [PageController::class, 'history'])->name('guest.history');
 
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [PageController::class, 'index'])
         ->name('dashboard');
 
-    Route::get('payment/{student}', [PaymentController::class, 'index'])
-        ->name('payment.index');
+    Route::get('pembayaran/{siswa}', [PembayaranController::class, 'index'])
+        ->name('pembayaran.index');
 
-    Route::get('payment/{student}/print', [PaymentController::class, 'print'])
-        ->name('payment.print');
+    Route::get('pembayaran/{siswa}/print', [PembayaranController::class, 'print'])
+        ->name('pembayaran.print');
 
-    Route::post('payment/{student}', [PaymentController::class, 'store'])
-        ->name('payment.store');
+    Route::post('pembayaran/{siswa}', [PembayaranController::class, 'store'])
+        ->name('pembayaran.store');
 
-    Route::get('payment/{student}/create', [PaymentController::class, 'create'])
-        ->name('payment.create');
+    Route::get('pembayaran/{siswa}/create', [PembayaranController::class, 'create'])
+        ->name('pembayaran.create');
 
-    Route::resource('student', StudentController::class)
+    Route::resource('siswa', SiswaController::class)
         ->middleware('role:' . Role::ADMIN->value)
         ->except(['show']);
 
-    Route::resource('grade', GradeController::class)
+    Route::resource('kelas', KelasController::class)
         ->middleware('role:' . Role::ADMIN->value)
         ->except(['show']);
 
-    Route::resource('staff', StaffController::class)
+    Route::resource('petugas', PetugasController::class)
         ->middleware('role:' . Role::ADMIN->value)
         ->except(['show']);
 
-    Route::resource('fee', SchoolFeeController::class)
+    Route::resource('bayar', SppController::class)
         ->middleware('role:' . Role::ADMIN->value)
         ->except(['show']);
 
