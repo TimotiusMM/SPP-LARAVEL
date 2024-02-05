@@ -21,7 +21,7 @@ class UserFactory extends Factory
     {
         $username = fake('id_ID')->userName();
         return [
-            'name' => fake('id_ID')->name(),
+            'nama' => fake('id_ID')->name(),
             'username' => $username,
             'password' => Hash::make($username),
             'role' => Role::STAFF,

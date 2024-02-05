@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Payment;
-use App\Models\Student;
+use App\Models\Spp;
+use App\Models\Siswa;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -13,38 +13,38 @@ class PageController extends Controller
     public function index(Request $request): View
     {
         return view('dashboard', [
-            'students' => Student::render($request->search),
+            'siswas' => Siswa::render($request->search),
             'search' => $request->search,
         ]);
     }
 
     public function login(Request $request): View|RedirectResponse
     {
-        $student = $request->session()->get('student');
-        if ($student) {
-            return redirect()->route('guest.history', $student->nisn);
+        $siswa = $request->session()->get('siswa');
+        if ($siswa) {
+            return redirect()->route('guest.history', $siswa->nisn);
         }
         return view('pages.guest.login');
     }
 
     public function logout(Request $request): RedirectResponse
     {
-        $request->session()->forget('student');
+        $request->session()->forget('siswa');
         return redirect()->route('login');
     }
 
     public function authentication(Request $request): RedirectResponse
     {
         try {
-            $student = Student::where('nisn', $request->get('nisn'))
+            $siswa = Siswa::where('nisn', $request->get('nisn'))
                 ->where('nis', $request->get('nis'))
                 ->first();
-            if (!$student) {
+            if (!$siswa) {
                 throw new \Exception('Data tidak cocok!');
             }
 
-            $request->session()->put('student', $student);
-            return redirect()->route('guest.history', $student->nisn);
+            $request->session()->put('siswa', $siswa);
+            return redirect()->route('guest.history', $siswa->nisn);
         } catch (\Throwable $exception) {
             return back()->with('status', $exception->getMessage())->with('message', $exception->getMessage());
         }
@@ -52,13 +52,13 @@ class PageController extends Controller
 
     public function history(Request $request): RedirectResponse|View
     {
-        $student = $request->session()->get('student');
-        if (!$student) {
+        $siswa = $request->session()->get('siswa');
+        if (!$siswa) {
             return redirect()->route('guest.login');
         }
         return view('pages.guest.history', [
-            'payments' => Payment::render($request->search, $student->nisn),
-            'student' => $student,
+            'spps' => Spp::render($request->search, $siswa->nisn),
+            'siswa' => $siswa,
         ]);
     }
 }

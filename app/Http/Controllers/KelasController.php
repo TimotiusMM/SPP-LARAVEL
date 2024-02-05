@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSchoolFeeRequest;
-use App\Http\Requests\UpdateSchoolFeeRequest;
-use App\Models\SchoolFee;
+use App\Http\Requests\StoreKelasRequest;
+use App\Http\Requests\UpdateKelasRequest;
+use App\Models\Kelas;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
-class SchoolFeeController extends Controller
+class KelasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request): View
     {
-        return view('pages.fee.index', [
-            'fees' => SchoolFee::render($request->search),
+        return view('pages.kelas.index', [
+            'kelass' => Kelas::render($request->search),
             'search' => $request->search,
         ]);
     }
@@ -28,39 +27,39 @@ class SchoolFeeController extends Controller
      */
     public function create(): View
     {
-        return view('pages.fee.create');
+        return view('pages.kelas.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSchoolFeeRequest $request): RedirectResponse
+    public function store(StoreKelasRequest $request): RedirectResponse
     {
         try {
-            SchoolFee::create($request->validated());
-            return redirect()->route('fee.index')->with('status', 'success')->with('message', 'Berhasil.');
+            Kelas::create($request->validated());
+            return redirect()->route('kelas.index')->with('status', 'success')->with('message', 'Berhasil.');
         } catch (\Throwable $exception) {
-            return redirect()->route('fee.index')->with('status', 'failed')->with('message', $exception->getMessage());
+            return redirect()->route('kelas.index')->with('status', 'failed')->with('message', $exception->getMessage());
         }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SchoolFee $fee): View
+    public function edit(Kelas $kelas): View
     {
-        return view('pages.fee.edit', [
-            'fee' => $fee,
+        return view('pages.kelas.edit', [
+            'kelas' => $kelas,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSchoolFeeRequest $request, SchoolFee $fee): RedirectResponse
+    public function update(UpdateKelasRequest $request, Kelas $kelas): RedirectResponse
     {
         try {
-            $fee->update($request->validated());
+            $kelas->update($request->validated());
             return back()->with('status', 'success')->with('message', 'Berhasil.');
         } catch (\Throwable $exception) {
             return back()->with('status', 'failed')->with('message', $exception->getMessage());
@@ -70,13 +69,14 @@ class SchoolFeeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SchoolFee $fee): RedirectResponse
+    public function destroy(Kelas $kelas): RedirectResponse
     {
         try {
-            $fee->delete();
+            $kelas->delete();
             return back()->with('status', 'success')->with('message', 'Berhasil.');
         } catch (\Throwable $exception) {
             return back()->with('status', 'failed')->with('message', $exception->getMessage());
         }
     }
 }
+

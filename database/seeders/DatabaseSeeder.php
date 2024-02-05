@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Enums\Role;
-use App\Models\Grade;
+use App\Models\Kelas;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -17,11 +17,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(UserSeeder::class);
-        Grade::factory()->count(100)->create();
+        Kelas::factory()->count(100)->create();
 
         User::create([
-            'name' => 'M Iqbal Effendi',
-            'username' => 'iqbaleff214',
+            'nama' => 'Timotius Marcelino Modo',
+            'username' => 'Timotius',
             'password' => Hash::make('admin'),
             'role' => Role::ADMIN,
         ]);

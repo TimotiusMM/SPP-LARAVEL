@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('school_fees', function (Blueprint $table) {
+        Schema::create('spps', function (Blueprint $table) {
             $table->id();
-            $table->year('year');
+            $table->year('tahun');
             $table->integer('nominal')->default(0);
             $table->timestamps();
         });
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('school_fees');
+        Schema::dropIfExists('spps');
     }
 };

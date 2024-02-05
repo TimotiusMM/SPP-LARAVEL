@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreStudentRequest;
-use App\Http\Requests\UpdateStudentRequest;
-use App\Models\Grade;
-use App\Models\SchoolFee;
-use App\Models\Student;
+use App\Http\Requests\StoreSiswaRequest;
+use App\Http\Requests\UpdateSiswaRequest;
+use App\Models\Kelas;
+use App\Models\Spp;
+use App\Models\Siswa;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 
-class StudentController extends Controller
+class SiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request): View
     {
-        return view('pages.student.index', [
-            'students' => Student::render($request->search),
+        return view('pages.siswa.index', [
+            'siswas' => Siswa::render($request->search),
             'search' => $request->search,
         ]);
     }
@@ -30,54 +30,54 @@ class StudentController extends Controller
      */
     public function create(): View
     {
-        return view('pages.student.create', [
-            'grades' => Grade::all(),
-            'fees' => SchoolFee::all(),
+        return view('pages.siswa.create', [
+            'kelass' => Kelas::all(),
+            'bayars' => Spp::all(),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreStudentRequest $request): RedirectResponse
+    public function store(StoreSiswaRequest $request): RedirectResponse
     {
         try {
-            Student::create($request->validated());
-            return redirect()->route('student.index')->with('status', 'success')->with('message', 'Berhasil.');
+            Siswa::create($request->validated());
+            return redirect()->route('siswa.index')->with('status', 'success')->with('message', 'Berhasil.');
         } catch (\Throwable $exception) {
-            return redirect()->route('student.index')->with('status', 'failed')->with('message', $exception->getMessage());
+            return redirect()->route('siswa.index')->with('status', 'failed')->with('message', $exception->getMessage());
         }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Student $student): View
+    public function show(Siswa $siswa): View
     {
-        return view('pages.student.show', [
-            'student' => $student
+        return view('pages.siswa.show', [
+            'siswa' => $siswa
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Student $student): View
+    public function edit(Siswa $siswa): View
     {
-        return view('pages.student.edit', [
-            'student' => $student,
-            'grades' => Grade::all(),
-            'fees' => SchoolFee::all(),
+        return view('pages.siswa.edit', [
+            'siswa' => $siswa,
+            'kelass' => Kelas::all(),
+            'bayars' => Spp::all(),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateStudentRequest $request, Student $student): RedirectResponse
+    public function update(UpdateSiswaRequest $request, Siswa $siswa): RedirectResponse
     {
         try {
-            $student->update($request->validated());
+            $siswa->update($request->validated());
             return back()->with('status', 'success')->with('message', 'Berhasil.');
         } catch (\Throwable $exception) {
             return back()->with('status', 'failed')->with('message', $exception->getMessage());
@@ -87,10 +87,10 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Student $student): RedirectResponse
+    public function destroy(Siswa $siswa): RedirectResponse
     {
         try {
-            $student->delete();
+            $siswa->delete();
             return back()->with('status', 'success')->with('message', 'Berhasil.');
         } catch (\Throwable $exception) {
             return back()->with('status', 'failed')->with('message', $exception->getMessage());

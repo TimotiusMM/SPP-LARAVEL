@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreGradeRequest;
-use App\Http\Requests\UpdateGradeRequest;
-use App\Models\Grade;
+use App\Enums\Role;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\Kelas;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
-class GradeController extends Controller
+class PetugasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request): View
     {
-        return view('pages.grade.index', [
-            'grades' => Grade::render($request->search),
+        return view('pages.petugas.index', [
+            'petugass' => User::render($request->search),
             'search' => $request->search,
         ]);
     }
@@ -27,39 +31,42 @@ class GradeController extends Controller
      */
     public function create(): View
     {
-        return view('pages.grade.create');
+        return view('pages.petugas.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreGradeRequest $request): RedirectResponse
+    public function store(StoreUserRequest $request): RedirectResponse
     {
         try {
-            Grade::create($request->validated());
-            return redirect()->route('grade.index')->with('status', 'success')->with('message', 'Berhasil.');
+            $data = $request->validated();
+            $data['password'] = Hash::make($data['username']);
+            $data['role'] = Role::PETUGAS;
+            User::create($data);
+            return redirect()->route('petugas.index')->with('status', 'success')->with('message', 'Berhasil.');
         } catch (\Throwable $exception) {
-            return redirect()->route('grade.index')->with('status', 'failed')->with('message', $exception->getMessage());
+            return redirect()->route('petugas.index')->with('status', 'failed')->with('message', $exception->getMessage());
         }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Grade $grade): View
+    public function edit(User $petugas): View
     {
-        return view('pages.grade.edit', [
-            'grade' => $grade,
+        return view('pages.petugas.edit', [
+            'petugas' => $petugas,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateGradeRequest $request, Grade $grade): RedirectResponse
+    public function update(UpdateUserRequest $request, User $petugas): RedirectResponse
     {
         try {
-            $grade->update($request->validated());
+            $petugas->update($request->validated());
             return back()->with('status', 'success')->with('message', 'Berhasil.');
         } catch (\Throwable $exception) {
             return back()->with('status', 'failed')->with('message', $exception->getMessage());
@@ -69,10 +76,10 @@ class GradeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Grade $grade): RedirectResponse
+    public function destroy(User $petugas): RedirectResponse
     {
         try {
-            $grade->delete();
+            $petugas->delete();
             return back()->with('status', 'success')->with('message', 'Berhasil.');
         } catch (\Throwable $exception) {
             return back()->with('status', 'failed')->with('message', $exception->getMessage());
