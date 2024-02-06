@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateKelasRequest;
 use App\Models\Kelas;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class KelasController extends Controller
@@ -46,13 +47,15 @@ class KelasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Kelas $kelas): View
+    
+    
+    public function edit(Kelas $kelas)
     {
         return view('pages.kelas.edit', [
             'kelas' => $kelas,
         ]);
     }
-
+    
     /**
      * Update the specified resource in storage.
      */

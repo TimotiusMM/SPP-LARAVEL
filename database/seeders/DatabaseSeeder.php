@@ -16,8 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(UserSeeder::class);
-        Kelas::factory()->count(100)->create();
 
         User::create([
             'nama' => 'Timotius Marcelino Modo',
