@@ -49,7 +49,12 @@
                                         <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
                                             Nomor Telepon
                                         </th>
-                                      
+                                        <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                                            Kelas
+                                        </th>
+                                        <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                                            SPP
+                                        </th>
                                         <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
                                             Aksi
                                         </th>
@@ -70,7 +75,12 @@
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                 {{ $siswa->telp ?? '-' }}
                                             </td>
-                                           
+                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                {{ $siswa->kelas?->namaKelas }}
+                                            </td>
+                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                {{ "Rp " . number_format($siswa->bayar?->nominal,2,',','.') }}
+                                            </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                 <form action="{{ route('siswa.destroy', $siswa->nisn) }}" method="post">
                                                     @csrf

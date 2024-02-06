@@ -42,7 +42,7 @@ class PetugasController extends Controller
         try {
             $data = $request->validated();
             $data['password'] = Hash::make($data['username']);
-            $data['role'] = Role::PETUGAS;
+            $data['role'] = Role::STAFF;
             User::create($data);
             return redirect()->route('petugas.index')->with('status', 'success')->with('message', 'Berhasil.');
         } catch (\Throwable $exception) {

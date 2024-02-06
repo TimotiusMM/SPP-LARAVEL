@@ -55,7 +55,7 @@
                                                 {{ $bayar->tahun }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ "Rp" . number_format($bayar->nominal,2,',','.') }}
+                                                {{ "Rp " . number_format($bayar->nominal,2,',','.') }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                 <form action="{{ route('bayar.destroy', $bayar->id) }}" method="post">

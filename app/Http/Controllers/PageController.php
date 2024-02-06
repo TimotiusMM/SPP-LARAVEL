@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Spp;
+use App\Models\Pembayaran;
 use App\Models\Siswa;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -57,7 +57,7 @@ class PageController extends Controller
             return redirect()->route('guest.login');
         }
         return view('pages.guest.history', [
-            'spps' => Spp::render($request->search, $siswa->nisn),
+            'pembayarans' => Pembayaran::render($request->search, $siswa->nisn),
             'siswa' => $siswa,
         ]);
     }

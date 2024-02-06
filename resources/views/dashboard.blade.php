@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dasbor') }}
+            {{ __('Dashboard') }}
         </h2>
     </x-slot>
 
@@ -67,7 +67,7 @@
                                                 {{ $siswa->kelas?->namaKelas }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ "Rp" . number_format($siswa->bayar?->nominal,2,',','.') }}
+                                                {{ "Rp " . number_format($siswa->bayar?->nominal,2,',','.') }}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                 <a href="{{ route('pembayaran.index', $siswa->nisn) }}"
