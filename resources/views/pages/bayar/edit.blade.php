@@ -9,9 +9,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
-                    <form method="post" action="{{ route('kelas.update', ['kelas' => $kelas]) }}" class="mt-6 space-y-6">
+                    <form method="post" action="{{ route('bayar.update', $bayar) }}" class="mt-6 space-y-6">
                         @csrf
-                        @method('PATCH')
+                        @method('patch')
+
                         <div>
                             <x-input-label for="tahun" :value="__('Tahun')" />
                             <x-text-input id="tahun" name="tahun" type="number" min="2010" max="2030" class="mt-1 block w-full" :value="old('tahun', $bayar->tahun)" autofocus />

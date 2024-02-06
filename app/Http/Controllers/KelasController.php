@@ -79,4 +79,3 @@ class KelasController extends Controller
         }
     }
 }
-
